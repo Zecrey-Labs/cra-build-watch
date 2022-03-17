@@ -9,6 +9,7 @@ const path = require('path');
 const ora = require('ora');
 const assert = require('assert');
 const exec = require('child_process').exec;
+const LiveReloadPlugin = require("webpack-livereload-plugin");
 
 const {
   flags: {
@@ -127,6 +128,8 @@ config.plugins[htmlPluginIndex] = new HtmlWebpackPlugin({
   template: paths.appHtml,
   filename: 'index.html',
 });
+config.devtool = "inline-source-map";
+config.plugins.push(new LiveReloadPlugin({}));
 
 spinner.succeed();
 spinner.start('Clear destination folder');
